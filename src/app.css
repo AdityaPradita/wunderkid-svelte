@@ -65,3 +65,22 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+table .club-icon {
+  width: 32px;
+  margin-right: 8px;
+}
+
+table tr th {
+  padding: 0 8px;
+}
+
+table tr td {
+  padding: 0 8px;
+}

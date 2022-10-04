@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import axios from "axios";
   let leagueTable = [];
+  let isLoading = true;
 
   onMount(async () => {
     await fetch("https://api.football-data.org/v2/competitions/BL1/standings", {
@@ -20,36 +21,41 @@
       .catch((error) => {
         console.log(error);
         return [];
+      })
+      .finally(() => {
+        isLoading = false;
       });
   });
 </script>
 
 <div>
-  <table>
-    <tr>
-      <th>Position</th>
-      <th>Team Name</th>
-      <th>Played</th>
-      <th>W</th>
-      <th>D</th>
-      <th>L</th>
-      <th>GD</th>
-      <th>Points</th>
-    </tr>
-    {#each leagueTable as item}
+  {#if !isLoading}
+    <table>
       <tr>
-        <td>{item.position}</td>
-        <td class="flex">
-          <img class="club-icon" src={item.team.crestUrl} />
-          <p>{item.team.name}</p>
-        </td>
-        <td>{item.playedGames}</td>
-        <td>{item.won}</td>
-        <td>{item.draw}</td>
-        <td>{item.lost}</td>
-        <td>{item.goalDifference}</td>
-        <td>{item.points}</td>
+        <th>Position</th>
+        <th>Team Name</th>
+        <th>Played</th>
+        <th>W</th>
+        <th>D</th>
+        <th>L</th>
+        <th>GD</th>
+        <th>Points</th>
       </tr>
-    {/each}
-  </table>
+      {#each leagueTable as item}
+        <tr>
+          <td>{item.position}</td>
+          <td class="flex">
+            <img class="club-icon" src={item.team.crestUrl} />
+            <p>{item.team.name}</p>
+          </td>
+          <td>{item.playedGames}</td>
+          <td>{item.won}</td>
+          <td>{item.draw}</td>
+          <td>{item.lost}</td>
+          <td>{item.goalDifference}</td>
+          <td>{item.points}</td>
+        </tr>
+      {/each}
+    </table>
+  {/if}
 </div>

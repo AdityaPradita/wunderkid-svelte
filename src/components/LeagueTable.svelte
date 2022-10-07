@@ -6,6 +6,7 @@
   export let leagueCode = "PL";
 
   onMount(async () => {
+    // https://github.com/JaxonRailey/svelte-football-standings example
     // PL = Premier League
     // BL1 = Bundesliga 1
     // SA = Serie A

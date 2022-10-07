@@ -3,13 +3,22 @@
   import axios from "axios";
   let leagueTable = [];
   let isLoading = true;
+  export let leagueCode = "PL";
 
   onMount(async () => {
-    await fetch("https://api.football-data.org/v2/competitions/BL1/standings", {
-      headers: new Headers({
-        "X-Auth-Token": import.meta.env.VITE_API_KEY,
-      }),
-    })
+    // PL = Premier League
+    // BL1 = Bundesliga 1
+    // SA = Serie A
+    // PD = Primera Division
+    // FL1 = Ligue 1
+    await fetch(
+      `https://api.football-data.org/v2/competitions/${leagueCode}/standings`,
+      {
+        headers: new Headers({
+          "X-Auth-Token": import.meta.env.VITE_API_KEY,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         const { standings } = data;
